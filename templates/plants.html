@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image Classification</title>
+    <meta charset="utf-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="logo" href="static\photos\logo.png" />
+
+    <!--Link for the css file-->
+    <link rel="stylesheet" href="static\Style sheet\styleHome.css" />
+    <link rel="stylesheet" href="static\Style sheet\header.css" />
+    <link rel="stylesheet" href="static\Style sheet\footer.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .plant-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .plant-card {
+        margin: 20px;
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+        width: 300px;
+      }
+
+      .plant-image {
+        height: 200px;
+        object-fit: cover;
+        width: 100%;
+      }
+
+      .plant-name {
+        font-size: 24px;
+        font-weight: bold;
+        margin: 10px;
+        text-align: center;
+      }
+
+      .plant-description {
+        font-size: 16px;
+        margin: 10px;
+        text-align: justify;
+      }
+
+      .plant-treatment-methods {
+        font-size: 16px;
+        margin: 10px;
+        text-align: justify;
+      }
+
+      h1 {
+        font-size: 60px;
+        position: static;
+        text-align: center;
+        color: #542525;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <a href="home.html"
+        ><img src="static\photos\logo.png" width="250px" height="65px"
+      /></a>
+
+      <!--navigation bar-->
+      <div class="navw" id="navId">
+        <a href="home.html">Home</a>
+        <a href="predict.html">Predict</a>
+        <a href="history.html">History</a>
+        <a href="AboutUs.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="signout.html"
+          ><i class="fa fa-sign-out" style="font-size: 20px"></i> Sign Out</a
+        >
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
+    </header>
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <h1>Plant Recommendations</h1>
+    <div class="plant-container">
+      {% for plant in plants %}
+      <div class="plant-card">
+        <img class="plant-image" src="{{ plant[1] }}" alt="{{ plant[0] }}" />
+        <div class="plant-name">{{ plant[0] }}</div>
+        <div class="plant-description">{{ plant[2] }}</div>
+        <div class="plant-treatment-methods">{{ plant[3] }}</div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!--footer section starts-->
+
+    <footer>
+      <div class="footer-content">
+        <a href="home.html"
+          ><img src="static\photos\logo.png" width="250px" height="65px"
+        /></a>
+
+        <!-- <p>Hi i'm ramindu jayawaeera</p> -->
+      </div>
+      <br /><br />
+
+      <!-- social icon -->
+      <ul class="social">
+        <li>
+          <a href="#"><i class="fa fa-twitter fa-lg"></i></a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-instagram fa-lg"></i></a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-github fa-lg"></i></a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-youtube fa-lg"></i></a>
+        </li>
+      </ul>
+
+      <br /><br />
+
+      <div class="footer-menu">
+        <ul class="f-menu">
+          <li><a href="home.html">Home</a></li>
+          <li><a href="predict.html">Predict</a></li>
+          <li><a href="history.html">History</a></li>
+          <li><a href="AboutUs.html">AboutUs</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </div>
+      <div class="bottom-details">
+        <div class="bottom_text"></div>
+      </div>
+    </footer>
+    <!--footer section End-->
+  </body>
+</html>

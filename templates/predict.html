@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>predict</title>
+    <meta charset="utf-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="logo" href="static\photos\logo.png" />
+
+
+    <!--Link for the css file-->
+    <link rel="stylesheet" href="static\Style sheet\styleHome.css" />
+    <link rel="stylesheet" href="static\Style sheet\header.css" />
+    <link rel="stylesheet" href="static\Style sheet\footer.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+</head>
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+    }
+    
+    .drop-container {
+        margin: 20px 60px;
+        position: relative;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+        padding: 20px;
+        border-radius: 10px;
+        border: 2px dashed #555;
+        color: #444;
+        cursor: pointer;
+        transition: background 0.2s ease-in-out, border 0.2s ease-in-out;
+    }
+    
+    .drop-container:hover {
+        background: #eee;
+        border-color: #111;
+    }
+    
+    .drop-container:hover .drop-title {
+        color: #222;
+    }
+    
+    .drop-title {
+        color: #444;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        transition: color 0.2s ease-in-out;
+    }
+    
+    input[type="file"] {
+        width: 350px;
+        max-width: 100%;
+        color: #444;
+        padding: 1px;
+        background: #fff;
+        border-radius: 10px;
+        border: 1px solid #555;
+    }
+    
+    input[type="file"]::file-selector-button {
+        margin-right: 20px;
+        border: none;
+        background: #542525;
+        padding: 10px 20px;
+        border-radius: 10px;
+        color: #fff;
+        cursor: pointer;
+        transition: background 0.2s ease-in-out;
+    }
+    
+    input[type="file"]::file-selector-button:hover {
+        background: #984a2e;
+    }
+    
+    .form-submit-button {
+        background: #b9dfff;
+        color: #fff;
+        border: 1px solid #eee;
+        border-radius: 20px;
+        box-shadow: 5px 5px 5px #eee;
+        text-shadow: none;
+    }
+    
+    .form-submit-button:hover {
+        background: rgba(255, 165, 0, 0.2);
+        color: #fff;
+        border: 1px solid #eee;
+        border-radius: 20px;
+        box-shadow: 5px 5px 5px #eee;
+        text-shadow: none;
+    }
+    /* new  */
+    
+    button {
+        padding: 12px 40px;
+        border-radius: 8px;
+        box-shadow: 2px 2px 2px 1px #542525;
+        border: 1px solid #542525;
+        font-size: 20px;
+    }
+    
+    button:hover {
+        background-color: #984a2e;
+        color: rgb(246, 244, 248);
+    }
+    
+    h1 {
+        font-size: 60px;
+        position: static;
+        text-align: center;
+        color: #542525;
+    }
+    
+    h2 {
+        font-size: 30px;
+        position: static;
+        text-align: center;
+    }
+    
+    h3 {
+        font-size: 20px;
+        position: static;
+        text-align: center;
+    }
+    
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .vertical-center {
+        position: right;
+        margin-left: 45%;
+    }
+    
+    table {
+        width: 60%;
+        position: relative;
+        align-content: center;
+    }
+    
+    .styled-table {
+        border-collapse: collapse;
+        margin: 25px 20%;
+        font-size: 2em;
+        font-family: sans-serif;
+        min-width: 400px;
+        box-shadow: 0 0 20px #984a2e;
+    }
+    
+    .styled-table thead tr {
+        background-color: #984a2e;
+        color: #ffffff;
+        text-align: left;
+    }
+    
+    .styled-table th,
+    .styled-table td {
+        padding: 12px 15px;
+    }
+    
+    body {
+        /* Margin bottom by footer height */
+        margin-bottom: 25%;
+    }
+    
+    .styled-table tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
+    
+    .styled-table tbody tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+    }
+    
+    .styled-table tbody tr:last-of-type {
+        border-bottom: 2px solid #b45736;
+    }
+    
+    html {
+        position: relative;
+        min-height: 100%;
+    }
+    
+    .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        /* Set the fixed height of the footer here */
+        height: 235px;
+        background-color: #542525;
+    }
+</style>
+
+
+<body>
+    <header>
+        <a href="home.html"><img src="static\photos\logo.png" width="250px" height="65px" /></a>
+
+        <!--navigation bar-->
+        <div class="navw" id="navId">
+            <a href="home.html">Home</a>
+            <a href="history.html">History</a>
+            <a href="AboutUs.html">About Us</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html"><i class="fa fa-sign-out" style="font-size: 20px"></i> Sign Out</a
+                >
+
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </header>
+
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <h1>Soil Type Prediction</h1>
+    <br /><br />
+    <form action="/submit" method="post" enctype="multipart/form-data">
+        <label for="images" class="drop-container">
+        <span class="drop-title">Drop files here</span>
+        or
+        <input
+          type="file"
+          name="my_image"
+          id="uploadFile"
+          accept="image/*"
+          required
+        />
+        <div class="form-submit-button">
+          <button type="submit">Submit</button>
+        </div>
+      </label>
+    </form>
+
+    <br /><br /> {% if prediction %}
+    <img src="{{img_path}}" height="250px" width="400px" class="center" />
+    <br /><br />
+
+    <p>
+        <h2>Predicted Soil : {{prediction}}</h2>
+    </p>
+
+    <br /><br />
+
+    <a href="plants.html">
+        <button class="vertical-center">Plants</button>
+    </a>
+
+    <br /><br /> <br /><br />
+    <h3>-------- Soil Type Probability --------</h3>
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>
+                    <h4>Soil Type</h4>
+                </th>
+                <th>
+                    <h4>Probability</h4>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Black Soil</td>
+                <td>{{blackPercentage}}</td>
+            </tr>
+
+            <tr>
+                <td>Laterite Soil</td>
+                <td>{{lateralPercentage}}</td>
+            </tr>
+            <tr>
+                <td>Peat Soil</td>
+                <td>{{peatPercentage}}</td>
+            </tr>
+            <tr>
+                <td>Yellow Soil</td>
+                <td>{{yellowPercentage}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {% endif %}
+    </div>
+    {% if warn %}
+    <h2>{{warn}}</h2>
+    {% endif %}
+
+
+    <footer class="footer">
+
+        <div class="footer-content">
+            <a href="home.html"><img src="static\photos\logo.png" width="250px" height="65px" /></a>
+
+            <!-- <p>Hi i'm ramindu jayawaeera</p> -->
+        </div>
+        <br><br>
+
+        <!-- social icon -->
+        <ul class="social">
+            <li><a href="#"><i class="fa fa-twitter fa-lg"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram fa-lg"></i></a></li>
+            <li><a href="#"><i class="fa fa-github fa-lg"></i></a></li>
+            <li><a href="#"><i class="fa fa-youtube fa-lg"></i></a></li>
+        </ul>
+
+        <br><br>
+
+        <div class="footer-menu">
+            <ul class="f-menu">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="predict.html">Predict</a></li>
+                <li><a href="history.html">History</a></li>
+                <li><a href="AboutUs.html">AboutUs</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="signout.html">Login</a></li>
+            </ul>
+        </div>
+        <div class="bottom-details">
+            <div class="bottom_text">
+
+
+
+            </div>
+        </div>
+    </footer>
+
+
+
+
+    <!--footer section End-->
+
+    <!--footer section ends-->
+    <!--back to top-->
+
+    <!--Link for the javascript file-->
+    <script src="static\script JS\script.js"></script>
+
+
+</body>
+
+</html>
