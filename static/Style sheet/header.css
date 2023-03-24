@@ -1,0 +1,76 @@
+/*navigation bar styling starts*/
+
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 10px;
+  background-color: rgba(73, 58, 58, 0.403);
+  z-index: 5;
+}
+
+.navw a {
+  color: rgb(0, 0, 0);
+  font-size: 18px;
+  text-transform: uppercase;
+  border: 5px solid transparent;
+  padding: 7px 20px;
+  border-radius: 10px;
+  line-height: 80px;
+}
+
+.navw a:hover {
+  border: 1px solid rgb(69, 46, 11);
+  transition: 0.5s;
+  color: rgb(69, 46, 11);
+}
+
+.navw .icon {
+  color: #fff;
+  font-size: 30px;
+  line-height: 80px;
+  float: right;
+  margin-right: 20px;
+  cursor: pointer;
+  display: none;
+}
+
+@media (max-width: 1080px) {
+  .nav a:not(:first-child) {
+    display: none;
+  }
+  label.logo {
+    font-size: 32px;
+    padding-left: 60px;
+  }
+  .nav a {
+    margin-right: 20px;
+    font-size: 17px;
+  }
+  .nav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media (max-width: 909px) {
+  .navClass.responsive {
+    position: relative;
+  }
+  .nav.responsive .icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+  .nav.responsive a {
+    float: none;
+    display: block;
+    text-align: center;
+    padding-right: 100px;
+  }
+  /*navigation bar styling ends*/
+  /*home section styling starts*/
+}

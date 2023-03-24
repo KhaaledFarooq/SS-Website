@@ -1,0 +1,142 @@
+*{
+  font-family: 'arial';
+  margin: 0; padding: 0;
+  text-decoration:none ;
+  list-style: none;
+  box-sizing:border-box;
+}
+
+body{
+	min-height:150vh;
+	
+}
+
+section1{
+	position:relative;
+	width:100%;
+	height:100vh;
+	background:url(gbg5.jpg);
+	background-size:cover;
+	background-attachment:fixed;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	clip-path:circle(180vh at 50% -80vh);
+	color:rgb(255,0,0);
+	
+	
+}
+
+section1.content{
+	
+	max-width:100px;
+	text-align:center;	
+	background-color: navy;
+}
+
+section2{
+	position:relative;
+	width:100%;
+	display:flex;
+	align-items:center;
+}
+.bg{
+	position:absolute;
+	background:black;
+}
+.scolor{
+	position:relative;
+	padding:10px;
+	border:none;
+	border-right:10px solid #fff;
+	outline:none;
+	width:200px;
+	border-radius:4px;
+	box-shadow:0 15px 25px rgba(0,0,0,0.1);
+}
+::selection{
+  background: orange;
+  color: #fff;
+}
+
+section2{
+	position:relative;
+	width:100%;
+	
+}
+html{
+  
+  overflow-x:hidden;
+  scroll-behavior: smooth;
+}
+header{
+  position: absolute;
+  top: 0; left:0;right:0;
+  display:flex;
+  justify-content: space-between;
+  padding: 4px 20px;
+  background-color: rgba(54, 52, 52, 0.295); 
+  z-index:1;
+  
+}
+
+.nav a {
+  color: white;
+  font-size: 18px;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  padding: 7px 20px;
+  border-radius:3px ;
+  line-height: 80px;
+ 
+}
+.nav a:hover {
+  border: 1px solid rgb(251, 250, 252);
+  transition: .5s;
+  color: rgb(247, 171, 58);
+}
+.nav .icon {
+  color:#fff;
+  font-size:30px;
+  line-height: 80px;
+  float: right;
+  margin-right: 20px;
+  cursor: pointer;
+  display: none;
+}
+@media (max-width: 1080px) {
+  .nav a:not(:first-child) {
+    display: none;
+
+  }
+  label.logo{
+    font-size: 32px; 
+    padding-left: 60px;
+  }
+  .nav a {
+    margin-right: 20px;
+    font-size: 17px;
+  }
+  .nav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media (max-width: 909px) {
+  .navClass.responsive {
+    position: relative;
+  }
+
+  .nav.responsive .icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+  .nav.responsive a {
+    float: none;
+    display: block;
+    text-align: center;
+    
+  }
+}

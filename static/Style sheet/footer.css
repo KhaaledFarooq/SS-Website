@@ -1,0 +1,107 @@
+/* footer section styling starts*/
+
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+*/
+
+footer {
+  /* position: absolute; */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #542525;
+  height: 20%;
+  padding-top: 2px;
+  width: 100vw;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.social {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0 3rem 0;
+}
+
+.social li {
+  margin: 0 10px;
+}
+
+li a {
+  text-decoration: none;
+  color: #fff;
+  border: 1.1px solid white;
+  padding: 15px;
+  border-radius: 50%;
+  width: 35px;
+}
+
+.footer-menu {
+  margin-bottom: 20px;
+  margin-left: 36%;
+}
+
+.footer-menu ul {
+  display: flex;
+}
+
+.footer-menu ul li {
+  padding-right: 10px;
+  display: block;
+}
+
+.footer-menu ul li a {
+  color: #cfd2cf;
+  border: 1.3px solid white;
+  padding: 6px 15px;
+  border-radius: 50px;
+  text-decoration: none;
+}
+
+.footer-menu ul li a:hover {
+  color: rgba(255, 165, 0, 0.2);
+}
+
+footer .bottom-details {
+  width: 100%;
+  background: rgba(255, 165, 0, 0.2);
+}
+
+footer .bottom-details .bottom_text {
+  max-width: 1250px;
+  margin: auto;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom-details .bottom_text span,
+.bottom-details .bottom_text a {
+  font-size: 14px;
+  font-weight: 300;
+  color: #fff;
+  opacity: 0.8;
+  text-decoration: none;
+}
+
+.bottom-details .bottom_text a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.bottom-details .bottom_text a {
+  margin-right: 10px;
+}

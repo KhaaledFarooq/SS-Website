@@ -1,0 +1,725 @@
+/*body styling starts*/
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+}
+
+::selection {
+  background: orange;
+  color: #fff;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+home_page {
+  background-color: #0077b5;
+  background-image: url(imagesHome/homeback.jpg);
+}
+
+/*body styling ends*/
+
+section {
+  padding: 2rem 9%;
+}
+
+.home {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  position: relative;
+  z-index: 0;
+}
+
+.home .content {
+  text-align: center;
+}
+
+.home .content h3 {
+  font-size: 4.5rem;
+  padding-top: 100px;
+  color: #fff;
+  text-transform: uppercase;
+  text-shadow: 0.3rem 0.5rem rgb(0, 0, 0, 0.1);
+}
+
+.home .content p {
+  font-size: 4.5rem;
+  color: #fff;
+  padding: 0.5rem 0;
+  padding-bottom: 50px;
+  padding-top: 50px;
+}
+
+.home .content h2 span {
+  color: #fff;
+  font-size: 150px;
+  padding-bottom: 50px;
+}
+
+.home .content h2 {
+  color: rgb(206, 148, 40);
+  font-size: 150px;
+  padding-bottom: 50px;
+}
+
+.home .video-container video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/*home section styling ends*/
+
+/*shop section styling starts*/
+
+.head {
+  text-align: center;
+  padding: 2.5rem;
+}
+
+.head span {
+  font-size: 3.5rem;
+  background: rgba(63, 44, 8, 0.2);
+  color: rgb(62, 48, 26);
+  border-radius: 0.5rem;
+  padding: 2rem 1rem;
+}
+
+.head span.space {
+  background: none;
+}
+
+.sale {
+  background-image: url("imagesHome/Soil.jpg");
+  max-width: 100%;
+  height: 450px;
+  background-size: cover;
+}
+
+.sale h2 {
+  font-size: 3rem;
+  font-family: Arial;
+  color: #fff;
+  padding-left: 100px;
+  padding-top: 10rem;
+}
+
+.sale p {
+  font-size: 7rem;
+  font-family: Arial;
+  font-weight: bolder;
+  color: #fff;
+  padding-left: 100px;
+  padding-top: 2rem;
+  text-transform: uppercase;
+}
+
+.sale h3 {
+  font-size: 3rem;
+  font-family: Arial;
+  color: #fff;
+  padding-left: 100px;
+  padding-top: 2rem;
+}
+
+.sale .btn {
+  margin-left: 13rem;
+  font-size: 20px;
+  display: inline-block;
+  margin-top: 3rem;
+  background: rgb(62, 48, 26);
+  color: #fff;
+  padding: 1rem 5rem;
+  border: 0.2rem solid #fff;
+  cursor: pointer;
+  text-align: center;
+}
+
+.sale .btn:hover {
+  background: rgba(37, 25, 3, 0.2);
+  color: rgb(232, 205, 156);
+}
+
+.shop {
+  min-height: 100vh;
+}
+
+.shop h1 {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.shop .box-border {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+  width: 85%;
+  margin: 0 auto;
+}
+
+.shop .box-border .box {
+  flex: 1 1 30rem;
+  border: 0.1rem solid black;
+  overflow: hidden;
+  position: relative;
+  margin: 1rem 2rem;
+}
+
+.shop .box-border .box .image {
+  height: 35rem;
+  text-align: center;
+  background: #fff;
+}
+
+.shop .box-border .box .image img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.shop .box-border .box p {
+  text-align: center;
+  padding: 1rem;
+  font-size: 2rem;
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
+.shop .box-border .box .price {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.shop .box-border .box .btn {
+  display: inline-block;
+  margin-top: 2rem;
+  background: rgb(62, 48, 26);
+  color: #fff;
+  padding: 1rem 13.96rem;
+  border: 0.2rem solid black;
+  cursor: pointer;
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+.shop .box-border .box .btn:hover {
+  background: rgba(62, 48, 26);
+  color: rgb(247, 171, 58);
+}
+
+/*home section styling starts*/
+
+.headGallery {
+  text-align: center;
+  padding-top: 10rem;
+}
+
+.headGallery span {
+  font-size: 3.5rem;
+  background: rgb(62, 48, 26);
+  color: rgb(247, 171, 58);
+  border-radius: 3rem;
+  padding: 2rem 2rem;
+}
+
+.rows {
+  display: flex;
+  padding: 50px 4px;
+}
+
+.colomns {
+  max-width: 30%;
+  padding: 0 4px;
+}
+
+.colomns img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.gallery {
+  margin-left: 100px;
+}
+
+.test img {
+  transition: 0.7s;
+}
+
+.test:hover img {
+  transform: scale(1.5);
+}
+
+.colomns .btn {
+  font-size: 20px;
+  display: inline-block;
+  margin-top: 1rem;
+  background: rgb(247, 171, 58);
+  color: #fff;
+  padding: 1rem 15rem;
+  border: 0.1rem solid black;
+  cursor: pointer;
+  text-align: center;
+}
+
+.colomns .btn:hover {
+  background: rgba(255, 165, 0, 0.2);
+  color: orange;
+}
+
+/*home section styling ends*/
+
+/*footer section styling starts*/
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+} */
+
+body {
+  min-height: 100%;
+  width: 100%;
+  background: #eeeceb;
+}
+
+footer {
+  position: static;
+  background: #542525;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 100px;
+  height: 1px;
+  width: 100%;
+  /* background: #afafb6; */
+}
+
+footer .content {
+  max-width: 1250px;
+  margin: auto;
+  padding: 30px 40px 40px 40px;
+}
+
+footer .content .top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.content .top .logo-details {
+  color: #fff;
+  font-size: 30px;
+}
+
+.content .top .media-icons {
+  display: flex;
+}
+
+.content .top .media-icons a {
+  height: 40px;
+  width: 40px;
+  margin: 0 8px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  color: #fff;
+  font-size: 17px;
+  text-decoration: none;
+  transition: all 0.4s ease;
+}
+
+.top .media-icons a:nth-child(1) {
+  background: #4267b2;
+}
+
+.top .media-icons a:nth-child(1):hover {
+  color: #4267b2;
+  background: #fff;
+}
+
+.top .media-icons a:nth-child(2) {
+  background: #1da1f2;
+}
+
+.top .media-icons a:nth-child(2):hover {
+  color: #1da1f2;
+  background: #fff;
+}
+
+.top .media-icons a:nth-child(3) {
+  background: #e1306c;
+}
+
+.top .media-icons a:nth-child(3):hover {
+  color: #e1306c;
+  background: #fff;
+}
+
+.top .media-icons a:nth-child(4) {
+  background: #0077b5;
+}
+
+.top .media-icons a:nth-child(4):hover {
+  color: #0077b5;
+  background: #fff;
+}
+
+.top .media-icons a:nth-child(5) {
+  background: #ff0000;
+}
+
+.top .media-icons a:nth-child(5):hover {
+  color: #ff0000;
+  background: #fff;
+}
+
+footer .content .link-boxes {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+footer .content .link-boxes .box {
+  width: calc(100% / 5 - 10px);
+}
+
+.content .link-boxes .box .link_name {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.link-boxes .box .link_name::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 35px;
+  background: #fff;
+}
+
+.content .link-boxes .box li {
+  margin: 6px 0;
+  list-style: none;
+}
+
+.content .link-boxes .box li a {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: all 0.4s ease;
+}
+
+.content .link-boxes .box li a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.content .link-boxes .input-box {
+  margin-right: 55px;
+}
+
+.link-boxes .input-box input {
+  height: 40px;
+  width: calc(100% + 55px);
+  outline: none;
+  border: 2px solid #afafb6;
+  background: #885a5a61;
+  border-radius: 4px;
+  padding: 0 15px;
+  font-size: 15px;
+  color: #fff;
+  margin-top: 5px;
+}
+
+.link-boxes .input-box input::placeholder {
+  color: #afafb6;
+  font-size: 16px;
+}
+
+.link-boxes .input-box input[type="button"] {
+  background: #fff;
+  color: #542525;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 4px 0;
+  opacity: 0.8;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.input-box input[type="button"]:hover {
+  opacity: 1;
+}
+
+footer .bottom-details {
+  width: 100%;
+  background: rgba(255, 165, 0, 0.2);
+}
+
+footer .bottom-details .bottom_text {
+  max-width: 1250px;
+  margin: auto;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom-details .bottom_text span,
+.bottom-details .bottom_text a {
+  font-size: 14px;
+  font-weight: 300;
+  color: #fff;
+  opacity: 0.8;
+  text-decoration: none;
+}
+
+.bottom-details .bottom_text a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.bottom-details .bottom_text a {
+  margin-right: 10px;
+}
+
+@media (max-width: 900px) {
+  footer .content .link-boxes {
+    flex-wrap: wrap;
+  }
+  footer .content .link-boxes .input-box {
+    width: 40%;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 700px) {
+  footer {
+    position: relative;
+  }
+  .content .top .logo-details {
+    font-size: 26px;
+  }
+  .content .top .media-icons a {
+    height: 35px;
+    width: 35px;
+    font-size: 14px;
+    line-height: 35px;
+  }
+  footer .content .link-boxes .box {
+    width: calc(100% / 3 - 10px);
+  }
+  footer .content .link-boxes .input-box {
+    width: 60%;
+  }
+  .bottom-details .bottom_text span,
+  .bottom-details .bottom_text a {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 520px) {
+  footer::before {
+    top: 145px;
+  }
+  footer .content .top {
+    flex-direction: column;
+  }
+  .content .top .media-icons {
+    margin-top: 16px;
+  }
+  footer .content .link-boxes .box {
+    width: calc(100% / 2 - 10px);
+  }
+  footer .content .link-boxes .input-box {
+    width: 100%;
+  }
+}
+
+/*footer section styling ends*/
+
+/*back to top*/
+
+.gotopbtn {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  background: rgb(243, 218, 172);
+  bottom: 40px;
+  right: 50px;
+  border-radius: 25px;
+  text-decoration: none;
+  text-align: center;
+  line-height: 50px;
+  color: white;
+  font-size: 22px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Container needed to position the overlay. Adjust the width as needed */
+
+.container {
+  position: relative;
+  width: 50%;
+  max-width: 500px;
+}
+
+/* Make the image to responsive */
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The overlay effect - lays on top of the container and over the image */
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5);
+  /* Black see-through */
+  color: #f1f1f1;
+  width: 100%;
+  transition: 0.5s ease;
+  opacity: 0;
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+/* When you mouse over the container, fade in the overlay title */
+
+.container:hover .overlay {
+  opacity: 1;
+}
+
+/* new */
+
+@keyframes scale {
+  100% {
+    transform: scale(1);
+  }
+}
+
+span {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(4px);
+}
+
+span:nth-child(1) {
+  animation: fade-in 0.8s 0.1s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+span:nth-child(2) {
+  animation: fade-in 0.8s 0.2s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+span:nth-child(3) {
+  animation: fade-in 0.8s 0.3s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+span:nth-child(4) {
+  animation: fade-in 0.8s 0.4s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+span:nth-child(5) {
+  animation: fade-in 0.8s 0.5s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+span:nth-child(6) {
+  animation: fade-in 0.8s 0.6s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+span:nth-child(7) {
+  animation: fade-in 0.8s 0.7s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+span:nth-child(8) {
+  animation: fade-in 0.8s 0.8s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+span:nth-child(9) {
+  animation: fade-in 0.8s 0.9s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+span:nth-child(10) {
+  animation: fade-in 0.8s 1s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+span:nth-child(11) {
+  animation: fade-in 0.8s 1.1s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+span:nth-child(12) {
+  animation: fade-in 0.8s 1.2s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+span:nth-child(13) {
+  animation: fade-in 0.8s 1.3s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+span:nth-child(14) {
+  animation: fade-in 0.8s 1.4s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+span:nth-child(15) {
+  animation: fade-in 0.8s 1.5s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+span:nth-child(16) {
+  animation: fade-in 0.8s 1.6s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+span:nth-child(17) {
+  animation: fade-in 0.8s 1.7s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+span:nth-child(18) {
+  animation: fade-in 0.8s 1.8s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+@keyframes fade-in {
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
