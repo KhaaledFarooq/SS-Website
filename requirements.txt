@@ -4,11 +4,5 @@ keras==2.11.0
 mysql-connector-python==8.0.32
 Pillow==9.3.0
 regex==2022.10.31
-tensorboard==2.11.2
-tensorboard-data-server==0.6.1
-tensorboard-plugin-wit==1.8.1
 tensorflow==2.11.0
-tensorflow-estimator==2.11.0
-tensorflow-intel==2.11.0
-tensorflow-io-gcs-filesystem==0.30.0
 
