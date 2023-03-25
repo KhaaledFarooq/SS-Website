@@ -2,7 +2,6 @@ Flask==2.1.0
 Flask-MySQLdb==1.0.1
 keras==2.11.0
 mysql-connector-python==8.0.32
-mysqlclient==2.1.1
 Pillow==9.3.0
 regex==2022.10.31
 tensorboard==2.11.2
