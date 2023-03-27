@@ -62,7 +62,7 @@ def predict(file):
     #print(soilID)
 
     mycursor = mydb.cursor()
-    mycursor.execute("INSERT INTO login_history (user_ID, soil_ID, history_date) VALUES (%s, %s, %s)", (userid, soilID, current_date))
+    mycursor.execute("INSERT INTO login_history (\"user_ID\", \"soil_ID\", \"history_date\") VALUES (%s, %s, %s)", (userid, soilID, current_date))
     mydb.commit()
     
 	#Converting probabilities in to percentages
@@ -180,13 +180,14 @@ def login():
     password_hash = hashlib.sha256(password.encode('utf-8')).hexdigest()
 
     mycursor = mydb.cursor()
-    mycursor.execute("SELECT * FROM users WHERE username = %s AND password = %s", (username, password_hash))
+    mycursor.execute("SELECT * FROM users WHERE \"username\" = %s AND \"password\" = %s", (username, password_hash))
+
     user = mycursor.fetchone()
 
     if user:
         global loggedin
         loggedin = True 
-        mycursor.execute("SELECT user_ID FROM users WHERE username = %s", (username,))
+        mycursor.execute("SELECT \"user_ID\" FROM \"users\" WHERE \"username\" = %s", (username,))
         result = mycursor.fetchone()
         global userid
         userid = result[0]
@@ -215,12 +216,13 @@ def signup_post():
         return render_template("login.html", message3="Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character")
 
     mycursor = mydb.cursor()
-    mycursor.execute("SELECT * FROM users WHERE username = %s", (username,))
+    mycursor.execute("SELECT * FROM users WHERE \"username\" = %s", (username,))
     existing_user = mycursor.fetchone()
     if existing_user:
         return render_template("login.html", message3="Username already exists")
     else:
-        mycursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, password_hash))
+        mycursor.execute("INSERT INTO users (\"username\", \"password\") VALUES (%s, %s)", (username, password_hash))
+
         mydb.commit()
         return render_template("login.html", message3="Account Created Successfully!!!")
 
@@ -268,9 +270,9 @@ def contactUs():
 def checkHistory():
     if loggedin:
         # perform a SQL query to retrieve the relevant data
-        cursor = mydb.cursor()
-        cursor.execute("SELECT soil_types.soil_ID, soil_types.Soil_Type, login_history.history_date FROM login_history JOIN soil_types ON login_history.soil_ID = soil_types.soil_ID WHERE login_history.user_ID = %s",(userid,))
-        rows = cursor.fetchall()
+        mycursor = mydb.cursor()
+        mycursor.execute("SELECT \"soil_types\".\"soil_ID\", \"soil_types\".\"Soil_Type\", \"login_history\".\"history_date\" FROM \"login_history\" JOIN \"soil_types\" ON \"login_history\".\"soil_ID\" = \"soil_types\".\"soil_ID\" WHERE \"login_history\".\"user_ID\" = %s",(userid,))
+        rows = mycursor.fetchall()
         # if there are no records, display a message instead of the table
         if not rows:
             return render_template('history.html', msg = "No History records found for this user ")
@@ -286,7 +288,7 @@ def plantRecommend():
     if loggedin:
         if predicted:
             mycursor = mydb.cursor()
-            mycursor.execute('SELECT Plant_Name, Image, Description, Treatment_Methods FROM plants WHERE Soil_ID = %s',(soilID,))
+            mycursor.execute('SELECT "Plant_Name", "Image", "Description", "Treatment_Methods" FROM "plants" WHERE "Soil_ID" = %s', (soilID,))
             plants = mycursor.fetchall()
             
             # Convert BLOB images to PNG format and base64-encoded data URIs
