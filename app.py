@@ -29,11 +29,11 @@ current_date = datetime.date.today()
 
 #connecting to the database
 mydb = psycopg2.connect(
-    host=os.environ.get('dpg-cggaup02qv28tc3180vg-a.singapore-postgres.render.com'),
-    port=os.environ.get('5432'),
-    user=os.environ.get('soilstation_user'),
-    password=os.environ.get('n8h5Cwt8fK2TNxemU4MR9r7ghmKwCkrm'),
-    database=os.environ.get('soilstation')
+    host=os.environ.get('DATABASE_HOST'),
+    port=os.environ.get('DATABASE_PORT'),
+    user=os.environ.get('DATABASE_USER'),
+    password=os.environ.get('DATABASE_PASSWORD'),
+    database=os.environ.get('DATABASE_NAME')
 )
 
 #Class of soil
