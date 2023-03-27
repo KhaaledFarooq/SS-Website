@@ -31,7 +31,7 @@ current_date = datetime.date.today()
 mydb = psycopg2.connect(
     host=os.environ.get('DATABASE_HOST'),
     port=os.environ.get('DATABASE_PORT'),
-    user=os.environ.get('soilstation_user'),
+    user=os.environ.get('DATABASE_USER'),
     password=os.environ.get('DATABASE_PASSWORD'),
     database=os.environ.get('DATABASE_NAME')
 )
