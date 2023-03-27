@@ -45,33 +45,28 @@ model = load_model("SoilTypeIdentify.h5")
 
 #Function to predict the soil type
 def predict(file):
-    
-	#Preprocessing the image
+    # Preprocessing the image
     image = load_img(file, target_size=(220, 220)) #Resizing
     image = img_to_array(image) #image to array
     image = np.reshape(image,[1,220,220,3]) #reshaping according to the reqiuired dimensions
     image = (image/255.) #Rescaling
     
-	#predicting
+    # Predicting
     preds = model.predict(image) #return array with probabilities for each class
     predsLabel = np.argmax(preds) #return the class with highest probability
-    global soilID 
-    soilID = int(predsLabel)+1
-    global predicted
-    predicted = True
-    #print(soilID)
-
+    
+    # Inserting into the database
     mycursor = mydb.cursor()
     mycursor.execute("INSERT INTO login_history (\"user_ID\", \"soil_ID\", \"history_date\") VALUES (%s, %s, %s)", (userid, soilID, current_date))
     mydb.commit()
-    
-	#Converting probabilities in to percentages
+
+    # Converting probabilities in to percentages
     num0 = (preds[0][0])*100 #black percentage
     num1 = (preds[0][1])*100 #laterite percentage
     num2 = (preds[0][2])*100 #peat percentage
     num3 = (preds[0][3])*100 #yellow percentage
     
-    #Rounding to two decimal places
+    # Rounding to two decimal places
     num0 = round(num0, 2)
     num1 = round(num1, 2)
     num2 = round(num2, 2)
@@ -79,7 +74,10 @@ def predict(file):
     
     prediction = classes[predsLabel] #predicted class
     
-	#Return predicted class and percentages as a tuple
+    # Closing the database connection
+    mydb.close()
+
+    # Return predicted class and percentages as a tuple
     return prediction, num0, num1, num2, num3
 
 
@@ -179,6 +177,14 @@ def login():
     # Hash the password
     password_hash = hashlib.sha256(password.encode('utf-8')).hexdigest()
 
+    # Establishing connection to the database
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user="yourusername",
+        password="yourpassword",
+        database="yourdatabase"
+    )
+
     mycursor = mydb.cursor()
     mycursor.execute("SELECT * FROM users WHERE \"username\" = %s AND \"password\" = %s", (username, password_hash))
 
@@ -192,8 +198,12 @@ def login():
         global userid
         userid = result[0]
         print(userid)
+        # Closing the database connection
+        mydb.close()
         return render_template("home.html")
     else:
+        # Closing the database connection
+        mydb.close()
         return render_template("login.html", message1="Login unsuccessful!!!", message2="Wrong username and or Password!!!")
 
 # #Setting signup page app route
@@ -219,12 +229,15 @@ def signup_post():
     mycursor.execute("SELECT * FROM users WHERE \"username\" = %s", (username,))
     existing_user = mycursor.fetchone()
     if existing_user:
+        mycursor.close()
         return render_template("login.html", message3="Username already exists")
     else:
         mycursor.execute("INSERT INTO users (\"username\", \"password\") VALUES (%s, %s)", (username, password_hash))
 
         mydb.commit()
+        mycursor.close()
         return render_template("login.html", message3="Account Created Successfully!!!")
+
 
 
 
@@ -275,14 +288,16 @@ def checkHistory():
         rows = mycursor.fetchall()
         # if there are no records, display a message instead of the table
         if not rows:
+            mycursor.close()
             return render_template('history.html', msg = "No History records found for this user ")
         # pass the data to the Jinja template to render the table
+        mycursor.close()
         return render_template('history.html', rows=rows)
     else:
         return render_template("login.html")
 
 
-#Setting plant recomendation page app route
+#Setting plant recommendation page app route
 @app.route("/plants.html", methods=['GET', 'POST'])
 def plantRecommend():
     if loggedin:
@@ -290,7 +305,7 @@ def plantRecommend():
             mycursor = mydb.cursor()
             mycursor.execute('SELECT "Plant_Name", "Image", "Description", "Treatment_Methods" FROM "plants" WHERE "Soil_ID" = %s', (soilID,))
             plants = mycursor.fetchall()
-            
+
             # Convert BLOB images to PNG format and base64-encoded data URIs
             new_plants = []
             for plant in plants:
@@ -300,12 +315,14 @@ def plantRecommend():
                 img_str = base64.b64encode(buffer.getvalue()).decode('utf-8')
                 img_data_uri = f"data:image/png;base64,{img_str}"
                 new_plants.append((plant[0], img_data_uri, plant[2], plant[3]))
-            
+
+            mycursor.close()
             return render_template('plants.html', plants=new_plants)
         else:
             return render_template("predict.html")
     else:
         return render_template("login.html")
+
     
 
 @app.route("/signout.html", methods= ["GET"])
