@@ -1,6 +1,6 @@
 #Importing Modules
 from flask import Flask, render_template, request, redirect
-import mysql.connector
+import psycopg2
 from keras.utils import load_img, img_to_array
 from keras.models import load_model
 import numpy as np
@@ -28,11 +28,12 @@ userid = 1
 current_date = datetime.date.today()
 
 #connecting to the database
-mydb = mysql.connector.connect(
-	host="localhost",
-	user="root",
-	password="",
-	database="soilstation"
+mydb = psycopg2.connect(
+    host=os.environ.get('dpg-cggaup02qv28tc3180vg-a.singapore-postgres.render.com'),
+    port=os.environ.get('5432'),
+    user=os.environ.get('soilstation_user'),
+    password=os.environ.get('n8h5Cwt8fK2TNxemU4MR9r7ghmKwCkrm'),
+    database=os.environ.get('soilstation')
 )
 
 #Class of soil
