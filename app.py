@@ -177,14 +177,6 @@ def login():
     # Hash the password
     password_hash = hashlib.sha256(password.encode('utf-8')).hexdigest()
 
-    # Establishing connection to the database
-    mydb = mysql.connector.connect(
-        host="localhost",
-        user="yourusername",
-        password="yourpassword",
-        database="yourdatabase"
-    )
-
     mycursor = mydb.cursor()
     mycursor.execute("SELECT * FROM users WHERE \"username\" = %s AND \"password\" = %s", (username, password_hash))
 
