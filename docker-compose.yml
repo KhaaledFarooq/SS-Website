@@ -1,6 +1,10 @@
 version: "3.8"
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        REPO_NAME: Khaaled/soilstation
     ports:
       - "5000:5000"
