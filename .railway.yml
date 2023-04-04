@@ -1,0 +1,14 @@
+name: soilstation
+env:
+  RAILWAY_APP_ID: 12fe1f6b-92fb-4c62-99c4-5e8e8f502583
+  PORT: 5000
+commands:
+  - name: Build Docker image
+    steps:
+      - run: docker-compose build
+  - name: Push Docker image to Registry
+    steps:
+      - run: docker-compose push
+  - name: Deploy to Railway
+    steps:
+      - run: railway deploy
