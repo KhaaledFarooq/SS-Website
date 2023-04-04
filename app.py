@@ -307,7 +307,7 @@ def checkHistory():
 def plantRecommend():
     if session.get('logged_in', False):
         if session.get('predicted', False):
-            soilID = session['soilID']
+            soilID = session['soil_id']
             mydb = get_database_connection()
             mycursor = mydb.cursor()
             mycursor.execute('SELECT "Plant_Name", "Image", "Description", "Treatment_Methods" FROM "plants" WHERE "Soil_ID" = %s', (soilID,))
@@ -345,7 +345,7 @@ def signingout():
 @app.route("/black.html", methods= ["GET"])
 def getBlack():
     if session.get('logged_in', False):
-        session['soilID'] = 1
+        session['soil_ID'] = 1
         session['predicted'] = True
         return redirect("/plants.html")
     else:
@@ -355,7 +355,7 @@ def getBlack():
 @app.route("/laterite.html", methods= ["GET"])
 def getLaterite():
     if session.get('logged_in', False):
-        session['soilID'] = 2
+        session['soil_ID'] = 2
         session['predicted'] = True
         return redirect("/plants.html")
     else:
@@ -365,7 +365,7 @@ def getLaterite():
 @app.route("/peat.html", methods= ["GET"])
 def getPeat():
     if session.get('logged_in', False):
-        session['soilID'] = 3
+        session['soil_ID'] = 3
         session['predicted'] = True
         return redirect("/plants.html")
     else:
@@ -375,7 +375,7 @@ def getPeat():
 @app.route("/yellow.html", methods= ["GET"])
 def getYellow():
     if session.get('logged_in', False):
-        session['soilID'] = 4
+        session['soil_ID'] = 4
         session['predicted'] = True
         return redirect("/plants.html")
     else:
