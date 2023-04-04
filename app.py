@@ -14,10 +14,11 @@ import datetime
 import re
 import hashlib
 import imghdr
-
+import secrets
 
 #intializing the flask app
 app  = Flask('Soil_Identifier')
+app.secret_key = secrets.token_urlsafe(16)
 
 
 @app.before_request
