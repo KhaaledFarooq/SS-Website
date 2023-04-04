@@ -32,13 +32,15 @@ def initialize_session():
     session.setdefault('current_date', datetime.date.today())
 
 #connecting to the database
-mydb = psycopg2.connect(
-    host=os.environ.get('DATABASE_HOST'),
-    port=os.environ.get('DATABASE_PORT'),
-    user=os.environ.get('DATABASE_USER'),
-    password=os.environ.get('DATABASE_PASSWORD'),
-    database=os.environ.get('DATABASE_NAME')
-)
+def get_database_connection():
+    mydb = psycopg2.connect(
+        host=os.environ.get('DATABASE_HOST'),
+        port=os.environ.get('DATABASE_PORT'),
+        user=os.environ.get('DATABASE_USER'),
+        password=os.environ.get('DATABASE_PASSWORD'),
+        database=os.environ.get('DATABASE_NAME')
+    )
+    return mydb
 
 #Class of soil
 classes = ["Black Soil","Laterite Soil","Peat Soil","Yellow Soil"]
@@ -64,6 +66,7 @@ def predict(file):
     session['predicted'] = True
     
     # Inserting into the database
+    mydb = get_database_connection()
     mycursor = mydb.cursor()
     mycursor.execute("INSERT INTO login_history (\"user_ID\", \"soil_ID\", \"history_date\") VALUES (%s, %s, %s)", (session.get('user_id', 1), session.get('soil_id', 0), session.get('current_date', datetime.date.today())))
     mydb.commit()
@@ -182,6 +185,7 @@ def login():
     # Hash the password
     password_hash = hashlib.sha256(password.encode('utf-8')).hexdigest()
 
+    mydb = get_database_connection()
     mycursor = mydb.cursor()
     mycursor.execute("SELECT * FROM users WHERE \"username\" = %s AND \"password\" = %s", (username, password_hash))
 
@@ -219,7 +223,8 @@ def signup_post():
     # Password validation
     if not re.match(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$', password):
         return render_template("login.html", message3="Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character")
-
+    
+    mydb = get_database_connection()
     mycursor = mydb.cursor()
     mycursor.execute("SELECT * FROM users WHERE \"username\" = %s", (username,))
     existing_user = mycursor.fetchone()
@@ -278,6 +283,7 @@ def contactUs():
 def checkHistory():
     if session.get('logged_in', False):
         # perform a SQL query to retrieve the relevant data
+        mydb = get_database_connection()
         mycursor = mydb.cursor()
         mycursor.execute("SELECT \"soil_types\".\"soil_ID\", \"soil_types\".\"Soil_Type\", \"login_history\".\"history_date\" FROM \"login_history\" JOIN \"soil_types\" ON \"login_history\".\"soil_ID\" = \"soil_types\".\"soil_ID\" WHERE \"login_history\".\"user_ID\" = %s",(session.get('userid'),))
         rows = mycursor.fetchall()
@@ -299,6 +305,7 @@ def plantRecommend():
     if 'loggedin' in session and session['loggedin']:
         if 'predicted' in session and session['predicted']:
             soilID = session['soilID']
+            mydb = get_database_connection()
             mycursor = mydb.cursor()
             mycursor.execute('SELECT "Plant_Name", "Image", "Description", "Treatment_Methods" FROM "plants" WHERE "Soil_ID" = %s', (soilID,))
             plants = mycursor.fetchall()
