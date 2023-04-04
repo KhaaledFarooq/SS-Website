@@ -18,6 +18,9 @@ jobs:
         run: |
           docker-compose build
           docker-compose push
+      - name: Install Railway CLI
+        run: |
+          curl -sSL https://railway.app/install.sh | bash
       - name: Generate Railway token
         run: |
           token=$(railway auth:token)
