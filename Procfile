@@ -1,1 +1,1 @@
-web: gunicorn myapp:app
+CUDA_VISIBLE_DEVICES="" gunicorn app:app
