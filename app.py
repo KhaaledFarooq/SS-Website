@@ -286,7 +286,7 @@ def checkHistory():
         mydb = get_database_connection()
         mycursor = mydb.cursor()
         mycursor.execute("SELECT soil_types.\"Soil_ID\", soil_types.\"Soil_Type\", login_history.\"history_date\" FROM login_history JOIN soil_types ON login_history.\"soil_ID\" = soil_types.\"Soil_ID\" WHERE login_history.\"user_ID\" = %s",(session.get('userid'),))
-        
+
         rows = mycursor.fetchall()
         # if there are no records, display a message instead of the table
         if not rows:
@@ -297,13 +297,15 @@ def checkHistory():
         return render_template('history.html', rows=rows)
     else:
         return render_template("login.html")
+    
+
 
 
 
 #Setting plant recommendation page app route
 @app.route("/plants.html", methods=['GET', 'POST'])
 def plantRecommend():
-    if session.get('loggedin', False):
+    if session.get('logged_in', False):
         if session.get('predicted', False):
             soilID = session['soilID']
             mydb = get_database_connection()
@@ -333,8 +335,8 @@ def plantRecommend():
 
 @app.route("/signout.html", methods= ["GET"])
 def signingout():
-    if session.get('loggedin', False):
-        session['loggedin'] = False
+    if session.get('logged_in', False):
+        session['logged_in'] = False
         return render_template("login.html")
     else:
         return render_template("login.html")
@@ -342,7 +344,7 @@ def signingout():
 
 @app.route("/black.html", methods= ["GET"])
 def getBlack():
-    if session.get('loggedin', False):
+    if session.get('logged_in', False):
         session['soilID'] = 1
         session['predicted'] = True
         return redirect("/plants.html")
@@ -352,7 +354,7 @@ def getBlack():
   
 @app.route("/laterite.html", methods= ["GET"])
 def getLaterite():
-    if session.get('loggedin', False):
+    if session.get('logged_in', False):
         session['soilID'] = 2
         session['predicted'] = True
         return redirect("/plants.html")
@@ -362,7 +364,7 @@ def getLaterite():
 
 @app.route("/peat.html", methods= ["GET"])
 def getPeat():
-    if session.get('loggedin', False):
+    if session.get('logged_in', False):
         session['soilID'] = 3
         session['predicted'] = True
         return redirect("/plants.html")
@@ -372,7 +374,7 @@ def getPeat():
 
 @app.route("/yellow.html", methods= ["GET"])
 def getYellow():
-    if session.get('loggedin', False):
+    if session.get('logged_in', False):
         session['soilID'] = 4
         session['predicted'] = True
         return redirect("/plants.html")
