@@ -304,7 +304,7 @@ def checkHistory():
 @app.route("/plants.html", methods=['GET', 'POST'])
 def plantRecommend():
     if session.get('loggedin', False):
-        if 'predicted' in session and session['predicted']:
+        if session.get('predicted', False):
             soilID = session['soilID']
             mydb = get_database_connection()
             mycursor = mydb.cursor()
