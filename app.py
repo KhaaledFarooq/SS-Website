@@ -124,38 +124,32 @@ def predicting():
         return render_template("login.html")	
 
 
-#Setting submit page app route
+# Setting submit page app route
 @app.route("/submit", methods = ['GET', 'POST'])
 def get_output():
     if request.method == 'POST':
-        #Request user uploaded image
+        # Request user uploaded image
         img = request.files["my_image"]
 
         # Check if the file is an image
         if not imghdr.what(img) in {'png', 'jpeg', 'jpg', 'jfif'}:
-            return render_template("predict.html", warn = "Invalid file type. Please upload a PNG, JPEG, JPG or JFIF image.")
+            return render_template("predict.html", warn="Invalid file type. Please upload a PNG, JPEG, JPG or JFIF image.")
 
-        #Set path to save image
-        #img_path1 = r"C:\Users\dell\Documents\SS-Website\static\img"
-        img_path2 = img.filename
-        stat_dir = r"\static\img" #Flask static directory
+        # Set path to save image
+        img_path = os.path.join(app.root_path, 'static', 'img', img.filename)
 
-        #Path to save image
-        img_path = os.path.join(stat_dir+"\\"+img_path2)    
+        # Save the image to the path
         img.save(img_path)
 
-        #Predicting the given image
+        # Predict the given image
         results = predict(img_path)
 
-        #New saved image in the static directory
-        img_path = os.path.join(stat_dir+"\\"+img_path2)
-
-        #Predicted results
-        prediction = (results[0]) # Predicted soil type
-        blackPercentage = ("{:.2f}".format(results[1])+" %") #Black percentage
-        lateralPercentage = ("{:.2f}".format(results[2])+" %") #Laterite percentage
-        peatPercentage = ("{:.2f}".format(results[3])+" %") #Peat percentage
-        yellowPercentage = ("{:.2f}".format(results[4])+" %") #Yellow percentage
+        # Predicted results
+        prediction = results[0]  # Predicted soil type
+        blackPercentage = "{:.2f} %".format(results[1])  # Black percentage
+        lateralPercentage = "{:.2f} %".format(results[2])  # Laterite percentage
+        peatPercentage = "{:.2f} %".format(results[3])  # Peat percentage
+        yellowPercentage = "{:.2f} %".format(results[4])  # Yellow percentage
 
     return render_template("predict.html", prediction=prediction, img_path=img_path, 
                            blackPercentage=blackPercentage, lateralPercentage=lateralPercentage, 
