@@ -244,7 +244,7 @@
     </form>
 
     <br /><br /> {% if prediction %}
-    <img src="{{img_path}}" height="250px" width="400px" class="center" />
+    <img src="{{ url_for('static', filename='img/' + img_path.split('/')[-1]) }}" height="250px" width="400px" class="center" />
     <br /><br />
 
     <p>
