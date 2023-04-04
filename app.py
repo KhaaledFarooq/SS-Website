@@ -1,5 +1,5 @@
 #Importing Modules
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 import psycopg2
 from keras.utils import load_img, img_to_array
 from keras.models import load_model
@@ -20,12 +20,15 @@ import imghdr
 app  = Flask('Soil_Identifier')
 
 
-soilID = 0
-User = "defaultuser"
-loggedin = False
-predicted = False
-userid = 1
-current_date = datetime.date.today()
+@app.before_request
+def initialize_session():
+    # set default values for session variables
+    session.setdefault('soil_id', 0)
+    session.setdefault('user', 'defaultuser')
+    session.setdefault('logged_in', False)
+    session.setdefault('predicted', False)
+    session.setdefault('user_id', 1)
+    session.setdefault('current_date', datetime.date.today())
 
 #connecting to the database
 mydb = psycopg2.connect(
@@ -55,9 +58,13 @@ def predict(file):
     preds = model.predict(image) #return array with probabilities for each class
     predsLabel = np.argmax(preds) #return the class with highest probability
     
+    # Setting session variables
+    session['soil_id'] = int(predsLabel) + 1
+    session['predicted'] = True
+    
     # Inserting into the database
     mycursor = mydb.cursor()
-    mycursor.execute("INSERT INTO login_history (\"user_ID\", \"soil_ID\", \"history_date\") VALUES (%s, %s, %s)", (userid, soilID, current_date))
+    mycursor.execute("INSERT INTO login_history (\"user_ID\", \"soil_ID\", \"history_date\") VALUES (%s, %s, %s)", (session.get('user_id', 1), session.get('soil_id', 0), session.get('current_date', datetime.date.today())))
     mydb.commit()
 
     # Converting probabilities in to percentages
@@ -81,6 +88,7 @@ def predict(file):
     return prediction, num0, num1, num2, num3
 
 
+
 #Setting starting app route
 @app.route("/", methods=['GET', 'POST'])
 def main():
@@ -90,16 +98,17 @@ def main():
 #Setting home page app route
 @app.route("/home.html", methods=['GET', 'POST'])
 def toHome():
-    if loggedin:
+    if session.get('logged_in', False):
         return render_template("home.html")
     else:
         return render_template("login.html")
 
 
+
 #Setting reccomendation page app route
 @app.route("/Recommendation.html", methods=['GET', 'POST'])
 def recommend():
-    if loggedin:
+    if session.get('logged_in', False):
         return render_template("Recommendation.html")
     else:
         return render_template("login.html")
@@ -108,7 +117,7 @@ def recommend():
 #Setting prediction page app route
 @app.route("/predict.html", methods=['GET', 'POST'])
 def predicting():
-    if loggedin:
+    if session.get('logged_in', False):
         return render_template("predict.html") 
     else:
         return render_template("login.html")	
@@ -152,13 +161,14 @@ def get_output():
                            peatPercentage=peatPercentage, yellowPercentage=yellowPercentage)
 
 
-#Setting AboutUs page app route
+# Setting AboutUs page app route
 @app.route("/AboutUs.html", methods=['GET', 'POST'])
 def about():
-    if loggedin:
+    if session.get('logged_in', False):
         return render_template("AboutUs.html") 
     else:
-        return render_template("login.html")	
+        return render_template("login.html")
+	
 
 
 #Setting login page app route
@@ -167,7 +177,7 @@ def logIn():
 	return render_template("login.html")
 
 
-#Check login with database
+# Check login with database
 # Login function
 @app.route('/login', methods=['POST'])
 def login():
@@ -183,13 +193,11 @@ def login():
     user = mycursor.fetchone()
 
     if user:
-        global loggedin
-        loggedin = True 
+        session['logged_in'] = True
+        session['user'] = username
         mycursor.execute("SELECT \"user_ID\" FROM \"users\" WHERE \"username\" = %s", (username,))
         result = mycursor.fetchone()
-        global userid
-        userid = result[0]
-        print(userid)
+        session['user_id'] = result[0]
         # Closing the database connection
         mydb.close()
         return render_template("home.html")
@@ -236,7 +244,7 @@ def signup_post():
 #Setting contact page app route
 @app.route("/contact.html", methods=['GET', 'POST'])
 def contactUs():
-    if loggedin:
+    if session.get('logged_in', False):
         if request.method == 'POST':
             # Get form data
             name = request.form['name']
@@ -273,10 +281,10 @@ def contactUs():
 #Setting contact page app route
 @app.route("/history.html", methods=['GET', 'POST'])
 def checkHistory():
-    if loggedin:
+    if session.get('logged_in', False):
         # perform a SQL query to retrieve the relevant data
         mycursor = mydb.cursor()
-        mycursor.execute("SELECT \"soil_types\".\"soil_ID\", \"soil_types\".\"Soil_Type\", \"login_history\".\"history_date\" FROM \"login_history\" JOIN \"soil_types\" ON \"login_history\".\"soil_ID\" = \"soil_types\".\"soil_ID\" WHERE \"login_history\".\"user_ID\" = %s",(userid,))
+        mycursor.execute("SELECT \"soil_types\".\"soil_ID\", \"soil_types\".\"Soil_Type\", \"login_history\".\"history_date\" FROM \"login_history\" JOIN \"soil_types\" ON \"login_history\".\"soil_ID\" = \"soil_types\".\"soil_ID\" WHERE \"login_history\".\"user_ID\" = %s",(session.get('userid'),))
         rows = mycursor.fetchall()
         # if there are no records, display a message instead of the table
         if not rows:
@@ -289,11 +297,13 @@ def checkHistory():
         return render_template("login.html")
 
 
+
 #Setting plant recommendation page app route
 @app.route("/plants.html", methods=['GET', 'POST'])
 def plantRecommend():
-    if loggedin:
-        if predicted:
+    if 'loggedin' in session and session['loggedin']:
+        if 'predicted' in session and session['predicted']:
+            soilID = session['soilID']
             mycursor = mydb.cursor()
             mycursor.execute('SELECT "Plant_Name", "Image", "Description", "Treatment_Methods" FROM "plants" WHERE "Soil_ID" = %s', (soilID,))
             plants = mycursor.fetchall()
@@ -315,13 +325,13 @@ def plantRecommend():
     else:
         return render_template("login.html")
 
+
     
 
 @app.route("/signout.html", methods= ["GET"])
 def signingout():
-    global loggedin
-    if loggedin:
-        loggedin = False
+    if session.get('loggedin', False):
+        session['loggedin'] = False
         return render_template("login.html")
     else:
         return render_template("login.html")
@@ -329,11 +339,9 @@ def signingout():
 
 @app.route("/black.html", methods= ["GET"])
 def getBlack():
-    global soilID
-    global predicted
-    if loggedin:
-        soilID = 1
-        predicted = True
+    if 'loggedin' in session and session['loggedin']:
+        session['soilID'] = 1
+        session['predicted'] = True
         return redirect("/plants.html")
     else:
         return render_template("login.html")
@@ -341,11 +349,9 @@ def getBlack():
   
 @app.route("/laterite.html", methods= ["GET"])
 def getLaterite():
-    global soilID
-    global predicted
-    if loggedin:
-        soilID = 2
-        predicted = True
+    if 'loggedin' in session and session['loggedin']:
+        session['soilID'] = 2
+        session['predicted'] = True
         return redirect("/plants.html")
     else:
         return render_template("login.html")
@@ -353,11 +359,9 @@ def getLaterite():
 
 @app.route("/peat.html", methods= ["GET"])
 def getPeat():
-    global soilID
-    global predicted
-    if loggedin:
-        soilID = 3
-        predicted = True
+    if 'loggedin' in session and session['loggedin']:
+        session['soilID'] = 3
+        session['predicted'] = True
         return redirect("/plants.html")
     else:
         return render_template("login.html")
@@ -365,11 +369,9 @@ def getPeat():
 
 @app.route("/yellow.html", methods= ["GET"])
 def getYellow():
-    global soilID
-    global predicted
-    if loggedin:
-        soilID = 4
-        predicted = True
+    if 'loggedin' in session and session['loggedin']:
+        session['soilID'] = 4
+        session['predicted'] = True
         return redirect("/plants.html")
     else:
         return render_template("login.html")
