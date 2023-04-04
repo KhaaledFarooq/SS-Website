@@ -285,7 +285,7 @@ def checkHistory():
         # perform a SQL query to retrieve the relevant data
         mydb = get_database_connection()
         mycursor = mydb.cursor()
-        mycursor.execute("SELECT soil_types.\"Soil_ID\", soil_types.\"Soil_Type\", login_history.\"history_date\" FROM login_history JOIN soil_types ON login_history.\"soil_ID\" = soil_types.\"Soil_ID\" WHERE login_history.\"user_ID\" = %s",(session.get('userid'),))
+        mycursor.execute("SELECT soil_types.\"Soil_ID\", soil_types.\"Soil_Type\", login_history.\"history_date\" FROM login_history JOIN soil_types ON login_history.\"soil_ID\" = soil_types.\"Soil_ID\" WHERE login_history.\"user_ID\" = %s",(session.get('user_id'),))
 
         rows = mycursor.fetchall()
         # if there are no records, display a message instead of the table
