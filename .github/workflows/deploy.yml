@@ -23,6 +23,11 @@ jobs:
           npm i -g @railway/cli
       - name: Deploy to Railway
         run: |
-          RAILWAY_TOKEN=$RAILWAY_TOKEN railway run
+          RAILWAY_TOKEN=$RAILWAY_TOKEN railway link
+          railway up
+          railway up --detach
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          
+          
+          
