@@ -23,8 +23,8 @@ jobs:
           npm i -g @railway/cli
       - name: Generate Railway token
         run: |
-          railway auth:login --email ${{ secrets.RAILWAY_EMAIL }}
-          token=$(railway auth:token)
+          railway login
+          token=$(railway whoami --token)
           echo "::set-env name=RAILWAY_TOKEN::$token"
       - name: Deploy to Railway
         run: |
