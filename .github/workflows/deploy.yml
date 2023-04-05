@@ -21,13 +21,9 @@ jobs:
       - name: Install Railway CLI
         run: |
           npm i -g @railway/cli
-          echo 'export PATH="$HOME/.railway/bin:$PATH"' >> $HOME/.bashrc
-      - name: Generate Railway token
-        run: |
-          token=$(railway auth:token)
-          echo "::set-env name=RAILWAY_TOKEN::$token"
       - name: Deploy to Railway
         run: |
-          railway deploy
+          RAILWAY_TOKEN=${{ secrets.RAILWAY_TOKEN }} railway run
+      - name: Deploy to Railway
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
