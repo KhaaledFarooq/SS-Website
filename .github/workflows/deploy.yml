@@ -23,8 +23,6 @@ jobs:
           npm i -g @railway/cli
       - name: Deploy to Railway
         run: |
-          RAILWAY_TOKEN=${{ secrets.RAILWAY_TOKEN }} railway link --project soilstation
-          railway up
-          railway up --detach
+          RAILWAY_TOKEN=${{ secrets.RAILWAY_TOKEN }} railway up
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
