@@ -20,7 +20,7 @@ jobs:
           docker-compose push
       - name: Generate Railway token
         run: |
-          railway auth:login --username ${{ secrets.RAILWAY_USERNAME }} --password ${{ secrets.RAILWAY_PASSWORD }}
+          railway auth:login --email ${{ secrets.RAILWAY_EMAIL }}
           token=$(railway auth:token)
           echo "::set-env name=RAILWAY_TOKEN::$token"
       - name: Deploy to Railway
