@@ -345,7 +345,7 @@ def signingout():
 @app.route("/black.html", methods= ["GET"])
 def getBlack():
     if session.get('logged_in', False):
-        session['soil_ID'] = 1
+        session['soil_id'] = 1
         session['predicted'] = True
         return redirect("/plants.html")
     else:
@@ -355,7 +355,7 @@ def getBlack():
 @app.route("/laterite.html", methods= ["GET"])
 def getLaterite():
     if session.get('logged_in', False):
-        session['soil_ID'] = 2
+        session['soil_id'] = 2
         session['predicted'] = True
         return redirect("/plants.html")
     else:
@@ -365,7 +365,7 @@ def getLaterite():
 @app.route("/peat.html", methods= ["GET"])
 def getPeat():
     if session.get('logged_in', False):
-        session['soil_ID'] = 3
+        session['soil_id'] = 3
         session['predicted'] = True
         return redirect("/plants.html")
     else:
@@ -375,7 +375,7 @@ def getPeat():
 @app.route("/yellow.html", methods= ["GET"])
 def getYellow():
     if session.get('logged_in', False):
-        session['soil_ID'] = 4
+        session['soil_id'] = 4
         session['predicted'] = True
         return redirect("/plants.html")
     else:
