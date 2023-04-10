@@ -263,7 +263,7 @@ def contactUs():
             try:
                 with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
                     smtp.starttls()
-                    smtp.login('soilstation.se32@gmail.com', 'izjuhdugrmobvfiw') 
+                    smtp.login(os.environ.get('EMAIL'), os.environ.get('EMAIL_APP_PASS'))
                     smtp.send_message(msg)
             except (smtplib.SMTPException, smtplib.SMTPAuthenticationError) as e:
                 print('Error occurred while sending email:', str(e))
